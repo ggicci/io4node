@@ -153,4 +153,3 @@ cython_debug/
 
 # Project specified
 workspaces/
-!workspaces/README.md

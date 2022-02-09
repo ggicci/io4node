@@ -1,8 +1,9 @@
 default: dev
 
 dev:
+	# build dev image
 	docker buildx build -f ci/dev.Dockerfile -t dev-venus:latest .
-	# build dev image if not exists
+	# start a container named "dev-venus" as the dev environment
 	docker run -d \
 		-e "USER=$(shell whoami)" \
 		-u "$(shell id -u):$(shell id -g)" \
