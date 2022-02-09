@@ -2,6 +2,8 @@
 
 # fixuid
 eval $( fixuid )
+# fix docker.sock permission
+sudo setfacl --modify user:coder:rw /var/run/docker.sock
 
 pip install -r requirements.txt
 

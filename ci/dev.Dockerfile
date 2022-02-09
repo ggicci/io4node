@@ -8,6 +8,9 @@ ARG DOCKER_COMPOSE_VERSION=v2.2.3
 ARG TARGETOS
 ARG TARGETARCH
 
+# Install essential commands
+RUN apt update && apt install -y sudo acl
+
 # Install docker-cli
 # https://github.com/docker/cli/issues/2281#issuecomment-577745894
 COPY --from=docker /usr/local/bin/docker /usr/local/bin/
@@ -27,9 +30,8 @@ RUN USER=coder GROUP=coder \
     && mkdir -p /etc/fixuid \
     && printf "user: $USER\ngroup: $GROUP\n" > /etc/fixuid/config.yml
 
-# Install sudo command
-RUN apt update && apt install -y sudo \
-    && usermod -aG sudo coder \
+# Add coder to sudoers
+RUN usermod -aG sudo coder \
     && echo "coder\tALL=(ALL)\tNOPASSWD:ALL" | tee /etc/sudoers.d/coder
 
 # Add bootstrap script

@@ -39,3 +39,20 @@ services:
       - "/path/to/save/venus/data:/var/lib/venus"
     restart: unless-stopped
 ```
+
+
+## Contribution Guide
+
+
+```bash
+git clone git@github.com:io4io/venus.git /path/to/local/repo
+cd /path/to/local/repo
+make dev
+```
+
+The command `make dev` will:
+
+1. build a docker image tagged `dev-venus:latest` for you
+2. run a container named `dev-venus` in detached mode
+
+We recommend developing in the container environment. For more details, please read [docs/contribution.md](docs/contribution.md "Contribution Guide").
