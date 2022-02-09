@@ -9,7 +9,7 @@ ARG TARGETOS
 ARG TARGETARCH
 
 # Install essential commands
-RUN apt update && apt install -y sudo acl
+RUN apt update && apt install -y sudo
 
 # Install docker-cli
 # https://github.com/docker/cli/issues/2281#issuecomment-577745894
