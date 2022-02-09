@@ -1,12 +1,12 @@
 # venus
 
-The program to serve self-hosted IO4 workspace service.
+The program to serve **self-hosted** IO4 workspace service.
 
 If you want to provision workspaces on your own infrastructures, use this program.
 
 ## Requirements
 
-Since the workspaces are provisioned as containers, `venus` requires a Docker Engine running on your machine, and the ability to manage the containers.
+Since the workspaces are provisioned as containers, `venus` requires a [Docker Engine](https://docs.docker.com/get-docker/) running on your machine.
 
 ## Install
 
@@ -22,6 +22,7 @@ docker pull io4io/venus:latest
 docker run \
   -v "/var/run/docker.sock:/var/run/docker.sock" \
   -v "/path/to/save/venus/data:/var/lib/venus" \
+  --restart unless-stopped
   io4io/venus:latest
 ```
 
@@ -39,7 +40,6 @@ services:
       - "/path/to/save/venus/data:/var/lib/venus"
     restart: unless-stopped
 ```
-
 
 ## Contribution Guide
 
