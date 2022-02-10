@@ -5,7 +5,7 @@ eval $( fixuid )
 # fix docker.sock permission
 # sudo chown coder:coder /var/run/docker.sock
 
-pip install -r requirements.txt
+pip install -r requirements/dev.txt
 
 STARTUP_SCRIPT="${HOME}/startup"
 

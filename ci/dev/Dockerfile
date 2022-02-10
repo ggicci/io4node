@@ -15,8 +15,9 @@ RUN apt update && apt install -y sudo
 # https://github.com/docker/cli/issues/2281#issuecomment-577745894
 COPY --from=docker /usr/local/bin/docker /usr/local/bin/
 # Install docker compose v2 cli
-RUN curl -sSL "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-${TARGETOS}-x86_64" \
-    --create-dirs -o /usr/local/lib/docker/cli-plugins/docker-compose \
+RUN mkdir -m755 -p /usr/local/lib/docker/cli-plugins \
+    && curl -sSL "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-${TARGETOS}-x86_64" \
+    -o /usr/local/lib/docker/cli-plugins/docker-compose \
     && chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
 
 # Fix uid: https://github.com/boxboat/fixuid
