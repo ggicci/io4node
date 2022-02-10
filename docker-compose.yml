@@ -1,0 +1,30 @@
+---
+version: "3"
+
+services:
+  dev-venus:
+    image: dev-venus:latest
+    container_name: dev-venus
+    user: "${DOCKER_UID}:${DOCKER_GID}"
+    volumes:
+      - ".:/workspace:delegated"
+    environment:
+      - DOCKER_HOST=tcp://socat-docker-api:2546
+    networks:
+      - venus
+
+  socat:
+    # docker.socket -> tcp
+    image: alpine/socat:1.7.4.3-r0
+    container_name: socat-docker-api
+    restart: unless-stopped
+    command: tcp-listen:2546,fork,reuseaddr unix-connect:/var/run/docker.sock
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    expose:
+      - 2546
+    networks:
+      - venus
+
+networks:
+  venus:

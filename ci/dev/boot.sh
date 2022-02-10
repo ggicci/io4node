@@ -3,7 +3,7 @@
 # fixuid
 eval $( fixuid )
 # fix docker.sock permission
-sudo chown coder:coder /var/run/docker.sock
+# sudo chown coder:coder /var/run/docker.sock
 
 pip install -r requirements.txt
 
