@@ -8,9 +8,11 @@ services:
     user: "${DOCKER_UID}:${DOCKER_GID}"
     volumes:
       - ".:/workspace:delegated"
-      - "./venus-data:/var/lib/venus"
+      - "${HOME}/.venus/dev/home:/home/coder"
+      - "${HOME}/.venus/dev/data:/var/lib/venus"
     environment:
       - DOCKER_HOST=tcp://socat-docker-api:2546
+      - VENUS_WORKSPACES_ROOT=${HOME}/.venus/dev/workspaces
     networks:
       - venus
 

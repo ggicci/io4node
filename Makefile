@@ -1,5 +1,6 @@
 default: dev
 
+SHELL=/usr/bin/env bash
 export DOCKER_UID=$(shell id -u)
 export DOCKER_GID=$(shell id -g)
 
@@ -14,5 +15,6 @@ dev:
 	# 	-v "/var/run/docker.sock.raw:/var/run/docker.sock" \
 	# 	--name dev-venus \
 	# 	dev-venus:latest
+	mkdir -p ~/.venus/dev/{home,data,workspaces}
 	docker compose create
 	docker compose start

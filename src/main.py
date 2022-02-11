@@ -8,8 +8,8 @@ from provision import WorkspaceProvision
 from settings import DOCKER_HOST
 
 
-def up_container(workspace_root: Path) -> None:
-    os.chdir(workspace_root)
+def up_container(workspace_meta_root: Path) -> None:
+    os.chdir(workspace_meta_root)
     os.makedirs("root", exist_ok=True)
     cmd = ["docker", "compose", "up"]
     subprocess.run(cmd)
@@ -22,7 +22,7 @@ def main():
         version="auto",
         user_agent="io4-venus",
     )
-    pv.docker_compose = """
+    pv.docker_compose = f"""
 ---
 version: "3"
 services:
@@ -31,7 +31,7 @@ services:
     container_name: io4-6v29tu
     restart: unless-stopped
     volumes:
-      - "./root:/root"
+      - "{pv.workspace_root_on_host / 'root'}:/root"
     environment:
       - TZ=Asia/Shanghai
       - PASSWORD=19911110
@@ -49,7 +49,7 @@ services:
     """
 
     pv.save_docker_compose_file()
-    up_container(pv.workspace_root)
+    up_container(pv.meta_root)
 
 
 if __name__ == "__main__":
