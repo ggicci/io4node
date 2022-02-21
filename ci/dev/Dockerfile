@@ -36,8 +36,8 @@ RUN usermod -aG sudo coder \
     && echo "coder\tALL=(ALL)\tNOPASSWD:ALL" | tee /etc/sudoers.d/coder
 
 # Add bootstrap script
-COPY ci/dev/boot.sh /usr/bin/boot.sh
+COPY ci/dev/boot.sh /usr/sbin/boot.sh
 
 USER coder
 WORKDIR /workspace
-CMD [ "boot.sh"]
+CMD [ "/usr/sbin/boot.sh"]
